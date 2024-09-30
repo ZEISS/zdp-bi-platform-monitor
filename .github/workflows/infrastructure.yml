@@ -24,9 +24,9 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Deploy Config
-              uses: azure/CLI@v1
+              uses: azure/powershell@v2
               with:
-                azcliversion: latest
+                azPSVersion: "latest"
                 inlineScript: |
                     chmod +x ${{ github.workspace }}/scripts/deployInfra.ps1
                     ${{ github.workspace }}/scripts/deployInfra.ps1
