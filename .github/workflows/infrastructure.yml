@@ -26,6 +26,7 @@ jobs:
             - name: Deploy Config
               uses: azure/CLI@v1
               with:
-                azcliversion: 2.53.0
+                azcliversion: latest
                 inlineScript: |
+                    chmod +x ${{ github.workspace }}/scripts/deployInfra.ps1
                     ${{ github.workspace }}/scripts/deployInfra.ps1
