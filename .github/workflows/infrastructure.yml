@@ -9,8 +9,8 @@ permissions:
 
 jobs:
     deploy-infra:
-        runs-on: 'ubunut-latest'
-        environment: 'dev'
+        runs-on: ubuntu-latest
+        environment: dev
         steps:
             - name: Login to Azure
               uses: azure/login@v1
