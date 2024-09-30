@@ -11,6 +11,6 @@ $resourceGroup = 'PlatformmonitorDev'
 
 New-AzResourceGroupDeployment `
     -ResourceGroupName $resourceGroup `
-    -TemplateFile './../infrastructure/main.bicep'`
+    -TemplateFile (Join-Path -Path (Split-Path $PSScriptRoot -Parent) -ChildPath '/infrastructure/main.bicep') `
     -TemplateParameterObject $parameters `
     -Verbose
