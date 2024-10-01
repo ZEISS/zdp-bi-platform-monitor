@@ -37,10 +37,10 @@ jobs:
                 push: true
                 tags: pmacrwesteu.azurecr.io/exporter:latest
 
-            - name: Upload Prometheus config file
+            - name: Upload Prometheus config file & update container image
               uses: azure/cli@v2
               with:
                 azcliversion: latest
                 inlineScript: |
                     az storage file upload --account-key ${{ secrets.ACCOUNT_KEY }} --account-name pmsawesteu --share-name config --source ${{ github.workspace }}/Platformmonitor/prometheus/prometheus.yml --path prometheus/prometheus.yml
-                    az containerapp update --container-name exporter --name pm-aca-prom-westeu --resource-group PlatformmonitorDev --image pmacrwesteu.azurecr.io/exporter:latest
+                    az containerapp update --name pm-aca-prom-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ vars.GITHUB_RUN_ID }}
