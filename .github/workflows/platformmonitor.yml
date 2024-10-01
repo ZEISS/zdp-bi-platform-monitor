@@ -29,14 +29,10 @@ jobs:
                 username: ${{ secrets.ACR_USER }}
                 password: ${{ secrets.ACR_PASSWORD }}
 
-            - run: |
-                docker build -f ${{ github.workspace }}/platformmonitor/exporter/Dockerfile -t pmacrwesteu.azurecr.io/exporter:latest ${{ github.workspace }}/platformmonitor/exporter
-                docker push pmacrwesteu.azurecr.io/exporter:latest
-
-            # - name: Build and push
-            #   uses: docker/build-push-action@v6
-            #   with:
-            #     context: ${{ github.workspace }}/platformmonitor/exporter
-            #     file: ${{ github.workspace }}/platformmonitor/exporter/Dockerfile
-            #     push: true
-            #     tags: pmacrwesteu.azurecr.io/exporter:latest
+            - name: Build and push
+              uses: docker/build-push-action@v6
+              with:
+                context: ${{ github.workspace }}/Platformmonitor/exporter
+                file: ${{ github.workspace }}/Platformmonitor/exporter/Dockerfile
+                push: true
+                tags: pmacrwesteu.azurecr.io/exporter:latest
