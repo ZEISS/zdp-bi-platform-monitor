@@ -30,7 +30,7 @@ jobs:
                 password: ${{ secrets.ACR_PASSWORD }}
 
             - run: |
-                docker build -f ./platformmonitor/exporter/Dockerfile -t pmacrwesteu.azurecr.io/exporter:latest ./platformmonitor/exporter
+                docker build -f ${{ github.workspace }}/platformmonitor/exporter/Dockerfile -t pmacrwesteu.azurecr.io/exporter:latest ${{ github.workspace }}/platformmonitor/exporter
                 docker push pmacrwesteu.azurecr.io/exporter:latest
 
             # - name: Build and push
