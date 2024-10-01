@@ -5,7 +5,7 @@ param managedIdentityName string = ''
 param acrName string = ''
 param acaEnvName string = ''
 param acaNamePrometheus string = ''
-param acaNameExporter string = ''
+// param acaNameExporter string = ''
 param acaNameAlertManager string = ''
 
 module storage 'modules/storage.bicep' = {

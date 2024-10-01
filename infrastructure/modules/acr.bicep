@@ -8,6 +8,9 @@ resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   sku: {
     name: 'Standard'
   }
+  properties: {
+    adminUserEnabled: true
+  }
 }
 
 resource acrPullRole 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {

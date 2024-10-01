@@ -29,13 +29,21 @@ jobs:
                 username: ${{ secrets.ACR_USER }}
                 password: ${{ secrets.ACR_PASSWORD }}
 
-            - name: Build and push
+            - name: Build and push Exporter
               uses: docker/build-push-action@v6
               with:
                 context: ${{ github.workspace }}/Platformmonitor/exporter
                 file: ${{ github.workspace }}/Platformmonitor/exporter/Dockerfile
                 push: true
                 tags: pmacrwesteu.azurecr.io/exporter:latest
+
+            - name: Build and push Alert Receiver
+              uses: docker/build-push-action@v6
+              with:
+                context: ${{ github.workspace }}/Platformmonitor/alerts_receiver
+                file: ${{ github.workspace }}/Platformmonitor/alerts_receiver/Dockerfile
+                push: true
+                tags: pmacrwesteu.azurecr.io/alerts_receiver:latest
 
             - name: Upload Prometheus config file & update container image
               uses: azure/cli@v2
@@ -45,3 +53,4 @@ jobs:
                     az storage file upload --account-key ${{ secrets.ACCOUNT_KEY }} --account-name pmsawesteu --share-name config --source ${{ github.workspace }}/Platformmonitor/prometheus/prometheus.yml --path prometheus/prometheus.yml
                     az storage file upload --account-key ${{ secrets.ACCOUNT_KEY }} --account-name pmsawesteu --share-name config --source ${{ github.workspace }}/Platformmonitor/prometheus/rules.yml --path prometheus/rules.yml
                     az containerapp update --name pm-aca-prom-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ github.run_id }}
+                    az containerapp update --name pm-aca-alert-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ github.run_id }}
