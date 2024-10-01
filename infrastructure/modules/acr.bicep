@@ -30,9 +30,9 @@ resource arcPull 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 
 resource arcPush 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  name: guid(resourceGroup().id, '95fad188-b920-427f-98f3-f1e4ebfb3783', acrPushRole.id)
+  name: guid(resourceGroup().id, '3b7a26ea-18cb-4e49-ae42-505e70aa4281', acrPushRole.id)
   properties: {
-    principalId: '95fad188-b920-427f-98f3-f1e4ebfb3783'
+    principalId: '3b7a26ea-18cb-4e49-ae42-505e70aa4281'
     roleDefinitionId: acrPushRole.id
     principalType: 'ServicePrincipal'
   }
