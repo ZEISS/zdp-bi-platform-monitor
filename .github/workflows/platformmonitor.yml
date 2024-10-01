@@ -32,7 +32,7 @@ jobs:
             - name: Build and push
               uses: docker/build-push-action@v6
               with:
-                context: .
+                context: ${{ github.workspace }}/platformmonitor/exporter/
                 file: ${{ github.workspace }}/platformmonitor/exporter/Dockerfile
                 push: true
                 tags: pmacrwesteu.azurecr.io/exporter:latest
