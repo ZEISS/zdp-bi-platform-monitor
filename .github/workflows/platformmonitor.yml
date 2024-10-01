@@ -43,4 +43,4 @@ jobs:
                 azcliversion: latest
                 inlineScript: |
                     az storage file upload --account-key ${{ secrets.ACCOUNT_KEY }} --account-name pmsawesteu --share-name config --source ${{ github.workspace }}/Platformmonitor/prometheus/prometheus.yml --path prometheus/prometheus.yml
-                    az containerapp update --name pm-aca-prom-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ vars.GITHUB_RUN_ID }}
+                    az containerapp update --name pm-aca-prom-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ github.run_id }}
