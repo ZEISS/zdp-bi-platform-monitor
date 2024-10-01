@@ -1,0 +1,27 @@
+global:
+
+route:
+  group_wait: 1800s
+  group_interval: 10s
+  repeat_interval: 10s
+  receiver: esbmail
+  routes:
+  # - match:
+  #     severity: critcal
+  #     receiver: msteams    
+  - match:
+      severity: critcal
+      receiver: esbmail
+
+receivers:
+  - name : esbmail
+    webhook_configs:
+      - url: "http://0.0.0.0:9082/api/alerts"
+        send_resolved: true
+      
+  # - name : msteams
+  #   msteams_configs:
+  #     - webhook_url: "https://zeiss.webhook.office.com/webhookb2/5b8ca673-7842-45fc-958e-01e52f11574b@28042244-bb51-4cd6-8034-7776fa3703e8/IncomingWebhook/68a5f5920913494c9d99e42ccd1ade1a/38675e43-740c-49f7-8f86-02aab79a1729"
+  #       send_resolved: true
+  #       title: 'TEST NOTIFICATION FROM PROMETHEUS'
+  #       text: 'TEST DESCRIPTION FROM PROMETHEUS'

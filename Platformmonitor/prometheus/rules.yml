@@ -1,0 +1,14 @@
+groups:
+- name: AllInstances
+  rules:
+  - alert: SystemModifiable
+    # Condition for alerting
+    expr: system_not_closed{System="p1b"}==1
+    for: 60s
+    # Annotation - additional informational labels to store more information
+    annotations:
+      title: 'Instance {{ $labels.System }} is modifiable'
+      description: '{{ $labels.System }} has been modifiable for more than 1 minute.'
+    # Labels - additional labels to be attached to the alert
+    labels:
+      severity: 'critical'

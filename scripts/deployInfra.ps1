@@ -5,7 +5,9 @@ $parameters['logAnalyticsName'] = "pmlogwesteu"
 $parameters['managedIdentityName'] = "pm-identity-westeu"
 $parameters['acrName'] = "pmacrwesteu"
 $parameters['acaEnvName'] = "pm-aca-env-westeu"
-$parameters['acaName'] = "pm-aca-prom-westeu"
+$parameters['acaNamePrometheus'] = "pm-aca-prom-westeu"
+$parameters['acaNameAlertManager'] = "pm-aca-alert-westeu"
+$parameters['acaNameExporter'] = "pm-aca-exporter-westeu"
 
 $resourceGroup = 'PlatformmonitorDev'
 

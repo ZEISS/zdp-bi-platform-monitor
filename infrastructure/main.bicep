@@ -4,7 +4,9 @@ param logAnalyticsName string = ''
 param managedIdentityName string = ''
 param acrName string = ''
 param acaEnvName string = ''
-param acaName string = ''
+param acaNamePrometheus string = ''
+param acaNameExporter string = ''
+param acaNameAlertManager string = ''
 
 module storage 'modules/storage.bicep' = {
   name: 'storageAccount'
@@ -48,10 +50,32 @@ module acaEnv 'modules/aca-env.bicep' = {
   }
 }
 
-module aca 'modules/aca.bicep' = {
-  name: 'aca'
+module acaPrometheus 'modules/aca-prometheus.bicep' = {
+  name: 'aca-prometheus'
   params: {
-    name: acaName
+    name: acaNamePrometheus
+    location: location
+    acr: acr.outputs.acrServerName
+    environmentId: acaEnv.outputs.envId
+    identityId: identity.outputs.id
+  }
+}
+
+// module acaExporter 'modules/aca-exporter.bicep' = {
+//   name: 'aca-exporter'
+//   params: {
+//     name: acaNameExporter
+//     location: location
+//     acr: acr.outputs.acrServerName
+//     environmentId: acaEnv.outputs.envId
+//     identityId: identity.outputs.id
+//   }
+// }
+
+module acaAlertmanager 'modules/aca-alertmanager.bicep' = {
+  name: 'aca-alertmanager'
+  params: {
+    name: acaNameAlertManager
     location: location
     acr: acr.outputs.acrServerName
     environmentId: acaEnv.outputs.envId

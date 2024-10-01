@@ -9,12 +9,12 @@ alerting:
   alertmanagers:
     - follow_redirects: true
       enable_http2: true
-      scheme: https
+      scheme: http
       timeout: 10s
       api_version: v2
       static_configs:
       - targets:
-        - pm-aca-alert-westeu.bravedesert-dee2cfab.westeurope.azurecontainerapps.io
+        - alertmanager:9093
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -38,4 +38,4 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ["0.0.0.0:9080"]
+      - targets: ["docker.for.mac.localhost:9080"]
