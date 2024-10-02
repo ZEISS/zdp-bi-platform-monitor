@@ -2,12 +2,11 @@ param location string = resourceGroup().location
 param storageAccountName string = ''
 param logAnalyticsName string = ''
 param managedIdentityName string = ''
+param grafanaName string = ''
 param acrName string = ''
 param acaEnvName string = ''
 param acaNamePrometheus string = ''
-// param acaNameExporter string = ''
 param acaNameAlertManager string = ''
-param acaNameGrafana string = ''
 
 module storage 'modules/storage.bicep' = {
   name: 'storageAccount'
@@ -62,17 +61,6 @@ module acaPrometheus 'modules/aca-prometheus.bicep' = {
   }
 }
 
-// module acaExporter 'modules/aca-exporter.bicep' = {
-//   name: 'aca-exporter'
-//   params: {
-//     name: acaNameExporter
-//     location: location
-//     acr: acr.outputs.acrServerName
-//     environmentId: acaEnv.outputs.envId
-//     identityId: identity.outputs.id
-//   }
-// }
-
 module acaAlertmanager 'modules/aca-alertmanager.bicep' = {
   name: 'aca-alertmanager'
   params: {
@@ -84,13 +72,12 @@ module acaAlertmanager 'modules/aca-alertmanager.bicep' = {
   }
 }
 
-module acaGrafana 'modules/aca-grafana.bicep' = {
-  name: 'aca-grafana'
+module grafana 'modules/grafana.bicep' = {
+  name: 'grafana'
   params: {
-    name: acaNameGrafana
+    name: grafanaName
     location: location
-    acr: acr.outputs.acrServerName
-    environmentId: acaEnv.outputs.envId
     identityId: identity.outputs.id
+    // prometheusUrl: acaPrometheus.outputs.url
   }
 }

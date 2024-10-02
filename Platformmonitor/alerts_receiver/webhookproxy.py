@@ -12,7 +12,7 @@ def hello_world():
 def receive_alert():
     alert = request.get_json()
     esb_api_url = 'https://esb.zeiss.com/public/api/mail/'
-    payload = '''{ "Subject": "Prometheus Alert", "MessageBodyPlainText": "Welcome to the ZEISSGlobal Plain Text Mail API.", "Priority": "High", "Recipients": ["kush.kashyap@zeiss.com"], "From": "zdp-afi@zeiss.com",
+    payload = '''{ "Subject": "Prometheus Alert", "MessageBodyPlainText": "Welcome to the ZEISSGlobal Plain Text Mail API.", "Priority": "High", "Recipients": ["stefan.pohl@zeiss.com"], "From": "zdp-afi@zeiss.com",
                 "Sender": "ZDP-AFI Platform Team",
                 "ReplyTo": "kush.kashyap@zeiss.com",
                 "ErrorReportDetails": false,

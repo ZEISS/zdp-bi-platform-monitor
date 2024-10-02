@@ -69,3 +69,5 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
     }
   }
 }
+
+output url string = prometehus.properties.configuration.ingress.fqdn

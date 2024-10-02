@@ -7,7 +7,7 @@ $parameters['acrName'] = "pmacrwesteu"
 $parameters['acaEnvName'] = "pm-aca-env-westeu"
 $parameters['acaNamePrometheus'] = "pm-aca-prom-westeu"
 $parameters['acaNameAlertManager'] = "pm-aca-alert-westeu"
-$parameters['acaNameGrafana'] = "pm-aca-grafana-westeu"
+$parameters['grafanaName'] = "pm-grafana-westeu"
 
 $resourceGroup = 'PlatformmonitorDev'
 
