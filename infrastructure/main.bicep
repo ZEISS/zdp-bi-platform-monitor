@@ -7,6 +7,7 @@ param acaEnvName string = ''
 param acaNamePrometheus string = ''
 // param acaNameExporter string = ''
 param acaNameAlertManager string = ''
+param acaNameGrafana string = ''
 
 module storage 'modules/storage.bicep' = {
   name: 'storageAccount'
@@ -76,6 +77,17 @@ module acaAlertmanager 'modules/aca-alertmanager.bicep' = {
   name: 'aca-alertmanager'
   params: {
     name: acaNameAlertManager
+    location: location
+    acr: acr.outputs.acrServerName
+    environmentId: acaEnv.outputs.envId
+    identityId: identity.outputs.id
+  }
+}
+
+module acaGrafana 'modules/aca-grafana.bicep' = {
+  name: 'aca-grafana'
+  params: {
+    name: acaNameGrafana
     location: location
     acr: acr.outputs.acrServerName
     environmentId: acaEnv.outputs.envId
