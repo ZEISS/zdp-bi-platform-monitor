@@ -35,10 +35,23 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
         maxReplicas: 1
         minReplicas: 1
       }
+      volumes: [
+        {
+          name: 'config'
+          storageType: 'AzureFile'
+          storageName: 'config'
+        }
+      ]
       containers: [
         {
           name: 'grafana'
           image: 'grafana/grafana-oss:latest'
+          volumeMounts: [
+            {
+              volumeName: 'config'
+              mountPath: '/var/lib/'
+            }
+          ]
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
