@@ -36,7 +36,7 @@ resource aca_env_storage 'Microsoft.App/managedEnvironments/storages@2024-03-01'
   parent: aca_env
   properties: {
     azureFile: {
-      accessMode: 'ReadOnly'
+      accessMode: 'ReadWrite'
       accountName: storage.name
       accountKey: storage.listKeys().keys[1].value
       shareName: 'config'
