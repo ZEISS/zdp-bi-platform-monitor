@@ -14,8 +14,8 @@ alerting:
       api_version: v2
       static_configs:
       - targets:
-        - pm-aca-alert-westeu.bravedesert-dee2cfab.westeurope.azurecontainerapps.io
-
+        - pm-aca-alert-westeu.bravedesert-dee2cfab.westeurope.azurecontainerapps.io:443
+        
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
    - "rules.yml"
