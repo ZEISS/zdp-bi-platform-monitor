@@ -52,6 +52,16 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
               mountPath: '/var/lib/'
             }
           ]
+          env: [
+            {
+              name: 'GF_SECURITY_ADMIN_USER'
+              value: 'admin'
+            }
+            {
+              name: 'GF_SECURITY_ADMIN_PASSWORD'
+              value: 'grafanaadmin'
+            }
+          ]
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
