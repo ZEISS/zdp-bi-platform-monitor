@@ -2,6 +2,7 @@ param name string
 param location string
 param logAnalyticsName string
 param storageAccountName string
+// param subnetId string
 
 resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' existing = {
   name:storageAccountName
@@ -22,6 +23,10 @@ resource aca_env 'Microsoft.App/managedEnvironments@2024-03-01' = {
         sharedKey: logAnalytics.listKeys().primarySharedKey
       }
     }
+    // vnetConfiguration: {
+    //   infrastructureSubnetId: subnetId
+    //   internal: true
+    // }
     workloadProfiles: [
       {
         name: 'Consumption'
@@ -45,3 +50,5 @@ resource aca_env_storage 'Microsoft.App/managedEnvironments/storages@2024-03-01'
 }
 
 output envId string = aca_env.id
+output defaultDomain string = aca_env.properties.defaultDomain
+output staticIp string = aca_env.properties.staticIp

@@ -21,7 +21,6 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
         allowInsecure: false
         targetPort: 9090
         external: true
-        clientCertificateMode: 'ignore'
       }
       registries: [
         {
@@ -45,24 +44,18 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
       containers: [
         {
           name: 'prometheus'
-          image: 'docker.io/prom/prometheus:latest'
+          // image: 'docker.io/ubuntu/prometheus:latest'
+          image: '${acr}/prometheus:latest'
           volumeMounts: [
             {
               volumeName: 'config'
-              mountPath: '/etc/'
+              mountPath: '/etc/prometheus'
+              subPath: 'prometheus'
             }
           ]
           resources: {
             cpu: json('0.5')
             memory: '1Gi'
-          }
-        }
-        {
-          name: 'exporter'
-          image: '${acr}/exporter:latest'
-          resources: {
-            cpu: json('0.25')
-            memory: '0.5Gi'
           }
         }
       ]

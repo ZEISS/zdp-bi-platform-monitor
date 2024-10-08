@@ -3,7 +3,7 @@ groups:
   rules:
   - alert: SystemModifiable
     # Condition for alerting
-    expr: system_not_closed{System="k1b"}==1
+    expr: system_not_closed{System="p1b"}==1
     for: 60s
     # Annotation - additional informational labels to store more information
     annotations:

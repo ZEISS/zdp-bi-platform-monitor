@@ -18,8 +18,8 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
     workloadProfileName: 'Consumption'
     configuration: {
       ingress: {
-        allowInsecure: false
-        targetPort: 9093
+        allowInsecure: true
+        targetPort: 9082
         external: true
       }
       registries: [
@@ -34,27 +34,13 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
         maxReplicas: 1
         minReplicas: 1
       }
-      volumes: [
-        {
-          name: 'config'
-          storageType: 'AzureFile'
-          storageName: 'config'
-        }
-      ]
       containers: [
         {
-          name: 'alertmanager'
-          image: 'prom/alertmanager:latest'
-          volumeMounts: [
-            {
-              volumeName: 'config'
-              mountPath: '/etc/alertmanager'
-              subPath: 'alertmanager'
-            }
-          ]
+          name: 'alerts-receiver'
+          image: '${acr}/alerts_receiver:latest'
           resources: {
-            cpu: json('0.5')
-            memory: '1Gi'
+            cpu: json('0.25')
+            memory: '0.5Gi'
           }
         }
       ]

@@ -8,13 +8,13 @@ global:
 alerting:
   alertmanagers:
     - follow_redirects: true
-      enable_http2: true
-      scheme: https
+      # enable_http2: true
+      scheme: http
       timeout: 10s
       api_version: v2
       static_configs:
       - targets:
-        - pm-aca-alert-westeu.bravedesert-dee2cfab.westeurope.azurecontainerapps.io:443
+        - pm-aca-alertmanager-westeu.icybush-9938eb9f.westeurope.azurecontainerapps.io
         
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -33,9 +33,6 @@ scrape_configs:
    # static_configs:
    #   - targets: ["localhost:9090"]
   - job_name: "sap_telemetry"
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
+    scheme: http
     static_configs:
-      - targets: ["0.0.0.0:9080"]
+      - targets: ["pm-aca-exporter-westeu.icybush-9938eb9f.westeurope.azurecontainerapps.io"]

@@ -6,7 +6,9 @@ $parameters['managedIdentityName'] = "pm-identity-westeu"
 $parameters['acrName'] = "pmacrwesteu"
 $parameters['acaEnvName'] = "pm-aca-env-westeu"
 $parameters['acaNamePrometheus'] = "pm-aca-prom-westeu"
-$parameters['acaNameAlertManager'] = "pm-aca-alert-westeu"
+$parameters['acaNameExporter'] = "pm-aca-exporter-westeu"
+$parameters['acaNameAlertManager'] = "pm-aca-alertmanager-westeu"
+$parameters['acaNameAlertsReceiver'] = "pm-aca-alertsreceiver-westeu"
 $parameters['grafanaName'] = "pm-grafana-westeu"
 
 $resourceGroup = 'PlatformmonitorDev'

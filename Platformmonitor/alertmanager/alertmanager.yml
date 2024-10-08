@@ -16,7 +16,7 @@ route:
 receivers:
   - name : esbmail
     webhook_configs:
-      - url: "http://0.0.0.0:9082/api/alerts"
+      - url: "http://pm-aca-alertsreceiver-westeu.icybush-9938eb9f.westeurope.azurecontainerapps.io/api/alerts"
         send_resolved: true
       
   # - name : msteams
