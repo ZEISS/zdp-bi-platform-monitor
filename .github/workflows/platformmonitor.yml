@@ -53,5 +53,5 @@ jobs:
                     az storage file upload --account-key ${{ secrets.ACCOUNT_KEY }} --account-name pmsawesteu --share-name config --source ${{ github.workspace }}/Platformmonitor/prometheus/prometheus.yml --path prometheus/prometheus.yml
                     az storage file upload --account-key ${{ secrets.ACCOUNT_KEY }} --account-name pmsawesteu --share-name config --source ${{ github.workspace }}/Platformmonitor/prometheus/rules.yml --path prometheus/rules.yml
                     az storage file upload --account-key ${{ secrets.ACCOUNT_KEY }} --account-name pmsawesteu --share-name config --source ${{ github.workspace }}/Platformmonitor/alertmanager/alertmanager.yml --path alertmanager/alertmanager.yml
-                    az containerapp update --name pm-aca-prom-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ github.run_id }}
-                    az containerapp update --name pm-aca-alert-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ github.run_id }}
+                    az containerapp update --name pm-aca-prometheus-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ github.run_id }}
+                    az containerapp update --name pm-aca-alertmanager-westeu --resource-group PlatformmonitorDev --revision-suffix ${{ github.run_id }}
