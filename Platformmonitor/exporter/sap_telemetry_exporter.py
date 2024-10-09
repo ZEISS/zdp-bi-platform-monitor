@@ -12,8 +12,8 @@ config.read("/exporter/config/config.ini")
 
 #config.read("/Users/zospohl/workspace/prometheus-grafana/exporter/config.ini")
 
-MANDATORY_ENV_VARS = ["subscriptionKey"]
-os.environ['subscriptionKey'] = 'd4763781420d4dcdb51126253e9de1cc'
+MANDATORY_ENV_VARS = ["esb-subscription-key"]
+# os.environ['subscriptionKey'] = 'd4763781420d4dcdb51126253e9de1cc'
 for var in MANDATORY_ENV_VARS:
     if var not in os.environ:
         raise EnvironmentError("Failed because {} is not set.".format(var))
