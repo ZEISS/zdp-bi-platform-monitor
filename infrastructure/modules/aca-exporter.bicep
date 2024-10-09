@@ -38,6 +38,12 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
         {
           name: 'exporter'
           image: '${acr}/exporter:latest'
+          env: [
+            {
+              name: 'esb-subscription-key'
+              secretRef: 'esb-subscription-key'
+            }
+          ]
           resources: {
             cpu: json('0.25')
             memory: '0.5Gi'

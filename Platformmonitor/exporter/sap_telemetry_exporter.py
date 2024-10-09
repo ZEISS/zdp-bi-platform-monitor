@@ -10,10 +10,7 @@ from prometheus_client import start_http_server
 config = configparser.ConfigParser()
 config.read("/exporter/config/config.ini")
 
-#config.read("/Users/zospohl/workspace/prometheus-grafana/exporter/config.ini")
-
 MANDATORY_ENV_VARS = ["esb-subscription-key"]
-# os.environ['subscriptionKey'] = 'd4763781420d4dcdb51126253e9de1cc'
 for var in MANDATORY_ENV_VARS:
     if var not in os.environ:
         raise EnvironmentError("Failed because {} is not set.".format(var))
@@ -24,7 +21,7 @@ class read_telemetry(object):
     def collect(self):
         for (system, url) in config.items('sap_telemetry_urls'):
             try:
-                response = requests.get(url,verify=False,headers={'EsbApi-Subscription-Key':os.environ['subscriptionKey']})
+                response = requests.get(url,verify=False,headers={'EsbApi-Subscription-Key':os.environ['esb-subscription-key']})
                 json_response = json.loads(response.content)
                 df = pd.json_normalize(json_response['d']['results'])
                 df = df[['Property','Source','Value']]

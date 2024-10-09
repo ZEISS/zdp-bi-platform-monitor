@@ -1,8 +1,14 @@
+import os
 from flask import Flask, request
 import requests
 from waitress import serve
 
 app = Flask(__name__)
+
+MANDATORY_ENV_VARS = ["esb-subscription-key"]
+for var in MANDATORY_ENV_VARS:
+    if var not in os.environ:
+        raise EnvironmentError("Failed because {} is not set.".format(var))
 
 @app.route('/')
 def hello_world():
@@ -17,7 +23,7 @@ def receive_alert():
                 "ReplyTo": "kush.kashyap@zeiss.com",
                 "ErrorReportDetails": false,
                 "SaveAttachmentsExternal": false}'''
-    headers = {'Content-type': 'application/json', 'Cache-Control': 'no-cache', 'EsbApi-Subscription-Key' : '93b12e82a8264d4594026388c6c664a1'}
+    headers = {'Content-type': 'application/json', 'Cache-Control': 'no-cache', 'EsbApi-Subscription-Key' : os.environ['esb-subscription-key']}
     
     try:
         r = requests.post(esb_api_url, data=payload, headers=headers)
