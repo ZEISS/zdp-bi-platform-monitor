@@ -44,8 +44,8 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
       containers: [
         {
           name: 'prometheus'
-          // image: 'docker.io/ubuntu/prometheus:latest'
-          image: '${acr}/prometheus:latest'
+          image: 'docker.io/ubuntu/prometheus:latest'
+          //image: '${acr}/prometheus:latest'
           volumeMounts: [
             {
               volumeName: 'config'
