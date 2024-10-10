@@ -4,6 +4,7 @@ param logAnalyticsName string = ''
 param managedIdentityName string = ''
 param grafanaName string = ''
 param acrName string = ''
+param keyVaultName string = ''
 param acaEnvName string = ''
 param acaNamePrometheus string = ''
 param acaNameExporter string = ''
@@ -42,6 +43,14 @@ module acr 'modules/acr.bicep' = {
   }
 }
 
+module kv 'modules/keyVault.bicep' = {
+  name: 'keyVault'
+  params: {
+    name: keyVaultName
+    principalId: identity.outputs.principalId
+  }
+}
+
 module acaEnv 'modules/aca-env.bicep' = {
   name: 'acaEnv'
   params: {
@@ -71,6 +80,7 @@ module acaExporter 'modules/aca-exporter.bicep' = {
     acr: acr.outputs.acrServerName
     environmentId: acaEnv.outputs.envId
     identityId: identity.outputs.id
+    keyVaultName: kv.outputs.name
   }
 }
 
@@ -93,6 +103,7 @@ module acaAlertReceiver 'modules/aca_alertsreceiver.bicep' = {
     acr: acr.outputs.acrServerName
     environmentId: acaEnv.outputs.envId
     identityId: identity.outputs.id
+    keyVaultName: kv.outputs.name
   }
 }
 
@@ -102,6 +113,5 @@ module grafana 'modules/grafana.bicep' = {
     name: grafanaName
     location: location
     identityId: identity.outputs.id
-    // prometheusUrl: acaPrometheus.outputs.url
   }
 }

@@ -15,12 +15,12 @@ resource acr 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
 
 resource acrPullRole 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
   name: '7f951dda-4ed3-4680-a7ca-43fe172d538d'
-  scope: subscription()
+  scope: resourceGroup()
 }
 
 resource acrPushRole 'Microsoft.Authorization/roleDefinitions@2022-04-01' existing = {
   name: '8311e382-0749-4cb8-b61a-304f252e45ec'
-  scope: subscription()
+  scope: resourceGroup()
 }
 
 resource arcPull 'Microsoft.Authorization/roleAssignments@2022-04-01' = {

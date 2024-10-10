@@ -3,6 +3,16 @@ param location string
 param environmentId string
 param identityId string
 param acr string
+param keyVaultName string
+
+resource kv 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
+  name: keyVaultName
+}
+
+resource secret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' existing = {
+  name: 'esb-subscription-key-exporter'
+  parent: kv
+}
 
 resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
   name: name
@@ -26,6 +36,13 @@ resource prometehus 'Microsoft.App/containerApps@2024-03-01' = {
         {
           identity: identityId
           server: acr
+        }
+      ]
+      secrets: [
+        {
+          name: 'esb-subscription-key'
+          identity: identityId
+          keyVaultUrl: secret.properties.secretUri
         }
       ]
     }
