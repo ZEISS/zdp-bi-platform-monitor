@@ -7,8 +7,12 @@ import requests
 from prometheus_client.core import GaugeMetricFamily, REGISTRY, CounterMetricFamily
 from prometheus_client import start_http_server
 
-config = configparser.ConfigParser()
-config.read("/exporter/config/config.ini")
+# config = configparser.ConfigParser()
+# config.read("/exporter/config/config.ini")
+
+systems = [
+    'i1b', 'k1b', 'p1b', 'i3w', 'p3w', 'i8b', 'k8b', 'p8b'
+]
 
 MANDATORY_ENV_VARS = ["esb-subscription-key"]
 for var in MANDATORY_ENV_VARS:
@@ -19,9 +23,9 @@ class read_telemetry(object):
     def __init__(self):
         pass
     def collect(self):
-        for (system, url) in config.items('sap_telemetry_urls'):
+        for system in systems:
             try:
-                response = requests.get(url,verify=False,headers={'EsbApi-Subscription-Key':os.environ['esb-subscription-key']})
+                response = requests.get('https://esb-dev.zeiss.com/public/api/platform-monitor/{}'.format(system),verify=False,headers={'EsbApi-Subscription-Key':os.environ['esb-subscription-key']})
                 json_response = json.loads(response.content)
                 df = pd.json_normalize(json_response['d']['results'])
                 df = df[['Property','Source','Value']]
